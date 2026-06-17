@@ -1,0 +1,35 @@
+trainer_args:
+  default_root_dir: .
+  accumulate_grad_batches: 4
+  enable_checkpointing: true
+  accelerator: "auto"
+  devices: "auto"
+  gradient_clip_val: 1.0
+  log_every_n_steps: 1
+  precision: "bf16-true"
+  max_epochs: 5
+  val_check_interval: 0.25
+optimizer:
+  lr_scheduler_args:
+    name: "cosine"
+    num_warmup_steps: 0.05
+  lr: 1e-3
+  optimizer_args:
+    weight_decay: 0.01
+logger:
+  _target_: lightning.pytorch.loggers.wandb.WandbLogger
+  project: "cot_probe"
+save_callback:
+  _target_: lightning.pytorch.callbacks.ModelCheckpoint
+  dirpath: checkpoints/cot_probe_deepseek_r1
+  save_on_train_epoch_end: false
+  monitor: "val/loss"
+  mode: "min"
+  save_last: true
+  save_top_k: 5
+callbacks:
+  - _target_: lightning.pytorch.callbacks.LearningRateMonitor
+  - _target_: lightning.pytorch.callbacks.EarlyStopping
+    monitor: "val/loss"
+    patience: 10
+    mode: "min"

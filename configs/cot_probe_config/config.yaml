@@ -1,0 +1,14 @@
+defaults:
+  - _self_
+  - data: wildguardmix
+  - model: deepseek_r1
+  - trainer: default
+  - probe: deepseek_r1
+
+data:
+  test_size: 0.05
+  batch_size: 4
+  num_workers: 8
+  max_length: 8192
+  messages_only: false
+  messages_column: "messages"

@@ -1,0 +1,2 @@
+base_model: deepseek-ai/DeepSeek-R1-Distill-Llama-8B
+adapter_path: null

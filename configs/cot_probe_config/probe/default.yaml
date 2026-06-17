@@ -1,0 +1,4 @@
+hidden_dim: [256, 128]
+activation: "gelu"
+layer_indices: null  # null = use all layers; or a list of layer indices, e.g. [10, 15, 20, 25, 30]
+pos_weight: null  # null = no class reweighting; set to e.g. 2.0 to upweight positives

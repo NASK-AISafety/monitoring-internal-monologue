@@ -1,0 +1,2 @@
+dataset_path: data/wildguardmix_response
+add_generation_prompt: false

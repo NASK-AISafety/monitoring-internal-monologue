@@ -1,0 +1,4 @@
+dataset_path: data/cot_experiments/probe_training_wildguardmix_train_template
+add_generation_prompt: false
+messages_only: true
+messages_column: "only_response_template"

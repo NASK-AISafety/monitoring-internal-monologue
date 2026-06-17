@@ -1,0 +1,4 @@
+hidden_dims: [1024, 512, 256]
+activation: "gelu"
+layer_indices: [9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31] # using every 2nd layer after layer 8
+pos_weight: null  # null = no class reweighting; set to e.g. 2.0 to upweight positives

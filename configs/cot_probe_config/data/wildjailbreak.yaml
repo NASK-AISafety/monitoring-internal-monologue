@@ -1,0 +1,5 @@
+dataset_path: data/wildjailbreak
+batch_size: 2
+num_workers: 4
+max_length: 2048
+add_generation_prompt: false
