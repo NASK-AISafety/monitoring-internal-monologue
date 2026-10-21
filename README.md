@@ -2,15 +2,6 @@
 
 This is the official repository for the paper: [**_Monitoring the Internal Monologue: Probe Trajectories Reveal Behavioral Dynamics in Chain-of-Thought_**](https://arxiv.org/abs/2605.18549).
 
-## Main Results
-
-Our empirical analysis on predicting future LRM behavior (harmfulness and mathematical correctness) via probe trajectories reveals several key findings:
-
-- **Max-Pooling is Essential:** When aggregating hidden states across the Chain-of-Thought, average-pooling and last-token methods collapse to near-random performance. Max-pooling, however, consistently achieves $>90\%$ AUROC and produces stable probability trajectories.
-- **Trajectory Features Improve Prediction:** Treating internal probe predictions as a continuous time-series signal and extracting temporal and signal-processing features yields consistent gains over static probes.
-- **Template-Based Training is Sufficient:** High-quality probes can be trained by injecting base dataset samples into static templates. This achieves near-parity with dynamically generated model reasoning traces, eliminating costly data generation steps.
-- **Different Behaviors, Different Dynamics:** Safety forecasting is driven by terminal and steady-state features (where the trajectory settles), whereas math error prediction is characterized by volatility and erratic probability spikes.
-
 ## Setup
 
 1. **Environment**: It is recommended to use a Python virtual environment.

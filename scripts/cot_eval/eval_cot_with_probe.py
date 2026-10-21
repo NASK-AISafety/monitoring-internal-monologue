@@ -144,7 +144,7 @@ def _predict_feature_batch(
     if use_nmc:
         means = params["means"]
         preds = get_nmc_pred(
-            hidden_state_vecs,
+            hidden_state_vecs.to(torch.float32),
             means,
             return_probs=not use_distance,
             return_logits=use_distance,
@@ -153,7 +153,7 @@ def _predict_feature_batch(
         W = params["W"]
         b = params["b"]
         preds = get_gda_pred(
-            hidden_state_vecs,
+            hidden_state_vecs.to(torch.float32),
             W=W,
             b=b,
             return_probs=not use_distance,
@@ -187,15 +187,15 @@ def main(
     for layer_name, layer_params in probe_artifact["layer_params"].items():
         if "W" in layer_params and layer_params["W"] is not None:
             layer_params["W"] = torch.tensor(
-                layer_params["W"], device=DEVICE, dtype=torch.bfloat16
+                layer_params["W"], device=DEVICE, dtype=torch.torch32
             )
         if "b" in layer_params and layer_params["b"] is not None:
             layer_params["b"] = torch.tensor(
-                layer_params["b"], device=DEVICE, dtype=torch.bfloat16
+                layer_params["b"], device=DEVICE, dtype=torch.torch32
             )
         if "means" in layer_params and layer_params["means"] is not None:
             layer_params["means"] = torch.tensor(
-                layer_params["means"], device=DEVICE, dtype=torch.bfloat16
+                layer_params["means"], device=DEVICE, dtype=torch.torch32
             )
     print(f"Loading model: {base_model}")
     model, tokenizer = load_model_for_pred(
@@ -375,7 +375,7 @@ def main(
 
     cumsum_path = save_folder / "cot_token_probe_preds_cumsum.parquet"
     unsummed_path = save_folder / "cot_token_probe_preds_unsummed.parquet"
-    
+
     pd.DataFrame(all_results_cumsum).to_parquet(cumsum_path)
     pd.DataFrame(all_results_unsummed).to_parquet(unsummed_path)
 
